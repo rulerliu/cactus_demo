@@ -1,0 +1,33 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.cloudwise.cactus_demo.mapper.cw.UserMapper" >
+  <resultMap id="BaseResultMap" type="com.cloudwise.cactus_demo.pojo.cw.User" >
+    <id column="id" property="id" jdbcType="VARCHAR" />
+    <result column="bim_request_id" property="bimRequestId" jdbcType="VARCHAR" />
+    <result column="type_id" property="typeId" jdbcType="VARCHAR" />
+    <result column="organization_id" property="organizationId" jdbcType="VARCHAR" />
+    <result column="user_name" property="userName" jdbcType="VARCHAR" />
+    <result column="profile_picture" property="profilePicture" jdbcType="VARCHAR" />
+    <result column="full_name" property="fullName" jdbcType="VARCHAR" />
+    <result column="first_name" property="firstName" jdbcType="VARCHAR" />
+    <result column="middle_name" property="middleName" jdbcType="VARCHAR" />
+    <result column="last_name" property="lastName" jdbcType="VARCHAR" />
+    <result column="email" property="email" jdbcType="VARCHAR" />
+    <result column="mobile" property="mobile" jdbcType="VARCHAR" />
+    <result column="language" property="language" jdbcType="VARCHAR" />
+    <result column="employee_type" property="employeeType" jdbcType="VARCHAR" />
+    <result column="employee_no" property="employeeNo" jdbcType="VARCHAR" />
+    <result column="is_disabled" property="isDisabled" jdbcType="BIT" />
+    <result column="is_deleted" property="isDeleted" jdbcType="BIT" />
+    <result column="is_locked" property="isLocked" jdbcType="BIT" />
+  </resultMap>
+  <sql id="Base_Column_List" >
+    id, bim_request_id, type_id, organization_id, user_name, profile_picture, full_name,
+    first_name, middle_name, last_name, email, mobile, language, employee_type, employee_no,
+    is_disabled, is_deleted, is_locked
+  </sql>
+
+  <select id="queryAllUserIds" resultType="java.lang.String">
+    select id from t_user
+  </select>
+</mapper>
