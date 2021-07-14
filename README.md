@@ -178,3 +178,11 @@ Admin 页面的日志默认显示 info 日志，若需修改显示的日志文�
 
    **PS: 1-7 步为一次性工作，若脚手架有更新需再执行一次 4-7 步；**
 
+
+
+
+file -- new project -- 勾选create from archetype -- add archetype
+
+com.cloudwise
+cactus-archetype
+1.0.0
