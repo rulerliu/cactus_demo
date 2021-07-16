@@ -8,7 +8,7 @@ spring:
     name: 'cactus'
   jackson:
     timeZone: GMT+8
-    date-format: yyyy-MM-dd HH:mm:ss:SSS
+    date-format: yyyy-MM-dd HH:mm:ss
     default-property-inclusion: non_null
     parser:
       allow-single-quotes: true
@@ -128,14 +128,14 @@ spring:
       client:
         url: http://localhost:${server.port}
 
-mybatis-plus:
+#mybatis-plus:
 #  mapper-locations: classpath:mapper/**/*.xml
-  configuration:
-    log-impl: org.apache.ibatis.logging.stdout.StdOutImpl
-    default-statement-timeout: 3 # 查询超时间,单位秒,不设置则无线等待
-    default-fetch-size: 100
-    map-underscore-to-camel-case: true
-  type-aliases-package: com.cloudwise.cactus_demo.pojo.*
+#  configuration:
+#    log-impl: org.apache.ibatis.logging.stdout.StdOutImpl
+#    default-statement-timeout: 3 # 查询超时间,单位秒,不设置则无线等待
+#    default-fetch-size: 100
+#    map-underscore-to-camel-case: true
+#  type-aliases-package: com.cloudwise.cactus_demo.pojo.*
 
 #springfox:
 #  documentation:

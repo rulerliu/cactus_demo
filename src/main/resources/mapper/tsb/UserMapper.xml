@@ -5,4 +5,9 @@
   <select id="queryAllUserIds" resultType="java.lang.String">
     select id from t_history
   </select>
+
+  <select id="queryAllUsers" resultType="history">
+    select * from t_history
+  </select>
+
 </mapper>

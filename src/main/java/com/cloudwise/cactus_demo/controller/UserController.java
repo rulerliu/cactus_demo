@@ -1,11 +1,15 @@
 package com.cloudwise.cactus_demo.controller;
 
+import com.baomidou.mybatisplus.core.metadata.IPage;
+import com.baomidou.mybatisplus.extension.plugins.pagination.Page;
 import com.cloudwise.cactus_demo.mapper.cw.UserMapper;
 import com.cloudwise.cactus_demo.mapper.tsb.HistoryMapper;
+import com.cloudwise.cactus_demo.pojo.PageVo;
 import com.cloudwise.cactus_demo.pojo.cw.User;
 import com.cloudwise.cactus_demo.pojo.tsb.History;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
@@ -20,6 +24,9 @@ public class UserController {
 
     @Autowired
     private HistoryMapper historyMapper;
+    @Autowired
+    @Qualifier("tsbUserMapper")
+    com.cloudwise.cactus_demo.mapper.tsb.UserMapper userMapper2;
 
     @RequestMapping("/getUser")
     public User getUser() {
@@ -43,6 +50,25 @@ public class UserController {
     public List<String> getHistoryList() {
         List<String> userList = historyMapper.queryAllUserIds();
         return userList;
+    }
+
+    @RequestMapping("/getHistoryList2")
+    public List<History> getHistoryList2() {
+        List<History> userList = historyMapper.queryAllUsers();
+        return userList;
+    }
+
+    @RequestMapping("/getHistoryPage")
+    public PageVo<History> getHistoryList2(Integer current, Integer size) {
+        IPage<History> userPage = new Page<>(current, size); //参数一是当前页，参数二是每页个数
+        userPage = historyMapper.selectPage(userPage, null);
+        return PageVo.pageResult(userPage);
+    }
+
+    @RequestMapping("/getUser2")
+    public User getUser2() {
+        User user = userMapper2.selectById(1);
+        return user;
     }
 
 }

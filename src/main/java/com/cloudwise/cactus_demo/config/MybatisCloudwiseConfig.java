@@ -1,7 +1,12 @@
 package com.cloudwise.cactus_demo.config;
 
+import com.baomidou.mybatisplus.core.MybatisConfiguration;
+import com.baomidou.mybatisplus.extension.plugins.MybatisPlusInterceptor;
 import com.baomidou.mybatisplus.extension.spring.MybatisSqlSessionFactoryBean;
+import org.apache.ibatis.logging.stdout.StdOutImpl;
+import org.apache.ibatis.plugin.Interceptor;
 import org.apache.ibatis.session.SqlSessionFactory;
+import org.apache.ibatis.type.JdbcType;
 import org.mybatis.spring.SqlSessionTemplate;
 import org.mybatis.spring.annotation.MapperScan;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -19,7 +24,9 @@ public class MybatisCloudwiseConfig {
 
     @Autowired
     @Qualifier("dataSourceCloudwise")
-    private DataSource cloudwiseDS;
+    DataSource cloudwiseDS;
+    @Autowired
+    private MybatisPlusInterceptor mybatisPlusInterceptor;
 
     @Bean
     @Primary
@@ -27,9 +34,26 @@ public class MybatisCloudwiseConfig {
 //        SqlSessionFactoryBean factoryBean = new SqlSessionFactoryBean();
 //        factoryBean.setDataSource(cloudwiseDS); // 使用本地据源, 连接本地的库
 //        return factoryBean.getObject();
+
+        // 导入mybatissqlsession配置
         MybatisSqlSessionFactoryBean factoryBean = new MybatisSqlSessionFactoryBean();
         factoryBean.setDataSource(cloudwiseDS);
         factoryBean.setMapperLocations(new PathMatchingResourcePatternResolver().getResources("classpath:mapper/**/*.xml"));
+        factoryBean.setTypeAliasesPackage("com.cloudwise.cactus_demo.pojo.*");
+        // 导入mybatis配置
+        MybatisConfiguration configuration = new MybatisConfiguration();
+        configuration.setJdbcTypeForNull(JdbcType.NULL);
+        configuration.setMapUnderscoreToCamelCase(true);
+        configuration.setCacheEnabled(false);
+        // 配置打印sql语句
+        configuration.setLogImpl(StdOutImpl.class);
+        factoryBean.setConfiguration(configuration);
+        // 添加分页功能
+        factoryBean.setPlugins(new Interceptor[]{
+                mybatisPlusInterceptor
+        });
+        // 导入全局配置
+//        factoryBean.setGlobalConfig(globalConfiguration());
         return factoryBean.getObject();
     }
 
