@@ -10,6 +10,7 @@ public class PageVo<T> {
     private Long current;
     private Long size;
     private Long total;
+    private Long pages;
     private List<T> data;
 
     public static PageVo pageResult(IPage page) {
@@ -17,6 +18,7 @@ public class PageVo<T> {
         pageVo.setCurrent(page.getCurrent());
         pageVo.setSize(page.getSize());
         pageVo.setTotal(page.getTotal());
+        pageVo.setPages(page.getPages());
         pageVo.setData(page.getRecords());
         return pageVo;
     }
