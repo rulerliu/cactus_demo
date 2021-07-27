@@ -38,7 +38,7 @@ public class MybatisCloudwiseConfig {
         // 导入mybatissqlsession配置
         MybatisSqlSessionFactoryBean factoryBean = new MybatisSqlSessionFactoryBean();
         factoryBean.setDataSource(cloudwiseDS);
-        factoryBean.setMapperLocations(new PathMatchingResourcePatternResolver().getResources("classpath:mapper/**/*.xml"));
+        factoryBean.setMapperLocations(new PathMatchingResourcePatternResolver().getResources("classpath*:mapper/**/*.xml"));
         factoryBean.setTypeAliasesPackage("com.cloudwise.cactus_demo.pojo.*");
         // 导入mybatis配置
         MybatisConfiguration configuration = new MybatisConfiguration();
