@@ -7,8 +7,6 @@ import java.util.List;
 
 public interface HistoryMapper extends BaseMapper<History> {
 
-    List<String> queryAllUserIds();
-
-    List<History> queryAllUsers();
+    List<History> queryAllHistyries();
 
 }

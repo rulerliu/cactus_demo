@@ -26,7 +26,7 @@ public class UserController {
     private HistoryMapper historyMapper;
     @Autowired
     @Qualifier("tsbUserMapper")
-    com.cloudwise.cactus_demo.mapper.tsb.UserMapper userMapper2;
+    com.cloudwise.cactus_demo.mapper.tsb.UserMapper tsbUserMapper;
 
     @RequestMapping("/getUser")
     public User getUser() {
@@ -40,6 +40,13 @@ public class UserController {
         return userList;
     }
 
+    /**------ db2 ---------**/
+    @RequestMapping("/getUserList2")
+    public List<User> getUserList2() {
+        List<User> user = tsbUserMapper.queryAllUsers();
+        return user;
+    }
+
     @RequestMapping("/getHistory")
     public History getHistory() {
         History history = historyMapper.selectById(1);
@@ -47,14 +54,8 @@ public class UserController {
     }
 
     @RequestMapping("/getHistoryList")
-    public List<String> getHistoryList() {
-        List<String> userList = historyMapper.queryAllUserIds();
-        return userList;
-    }
-
-    @RequestMapping("/getHistoryList2")
-    public List<History> getHistoryList2() {
-        List<History> userList = historyMapper.queryAllUsers();
+    public List<History> getHistoryList() {
+        List<History> userList = historyMapper.queryAllHistyries();
         return userList;
     }
 
@@ -63,12 +64,6 @@ public class UserController {
         IPage<History> userPage = new Page<>(current, size); //参数一是当前页，参数二是每页个数
         userPage = historyMapper.selectPage(userPage, null);
         return PageVo.pageResult(userPage);
-    }
-
-    @RequestMapping("/getUser2")
-    public User getUser2() {
-        User user = userMapper2.selectById(1);
-        return user;
     }
 
 }

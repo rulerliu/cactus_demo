@@ -9,6 +9,6 @@ import java.util.List;
 @Repository("tsbUserMapper")
 public interface UserMapper extends BaseMapper<User> {
 
-    List<String> queryAllUserIds();
+    List<User> queryAllUsers();
 
 }

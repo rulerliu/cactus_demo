@@ -1,7 +1,7 @@
 server:
   compression:
     enabled: true
-  port: 8087
+  port: 8088
 
 spring:
   application:
@@ -168,3 +168,16 @@ logging:
     com.cloudwise.cactus: debug
   file:
     name: logs/info.log
+
+job:
+  baseSleepTimeMilliseconds: 1000
+  maxSleepTimeMilliseconds: 3000
+  sessionTimeoutMilliseconds: 60000
+  connectionTimeoutMilliseconds: 60000
+  maxRetries: 3
+  zkServerList: 127.0.0.1:2181
+  namespace: rtp-core-job
+  job1Shards: 1
+  job1Cron: 0/5 * * * * ?
+  job2Shards: 2
+  job2Cron: 0/10 * * * * ?
